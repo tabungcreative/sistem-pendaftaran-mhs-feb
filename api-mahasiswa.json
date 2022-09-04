@@ -1,0 +1,17 @@
+{
+    "mahasiswa": {
+        "status": "success",
+        "data" : [
+            {
+                "nim": "2019150080",
+                "nama": "roy",
+                "prodi": "india"
+            }, 
+            {
+                "id": "2019150029",
+                "name": "sam",
+                "location": "wales"
+            }
+        ]
+    }
+}
