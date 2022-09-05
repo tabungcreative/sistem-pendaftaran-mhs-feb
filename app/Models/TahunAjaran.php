@@ -12,4 +12,8 @@ class TahunAjaran extends Model
     protected $filleble = [
         'tahun', 'semester'
     ];
+
+    public function skripsi() {
+        return $this->hasMany(Skripsi::class);
+    }
 }

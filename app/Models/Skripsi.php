@@ -13,4 +13,8 @@ class Skripsi extends Model
         'nim', 'tahun_ajaran_id', 'judul', 'pembimbing1', 'pembimbing2', 'file_berkas', 'file_ijazah', 'file_transkrip', 'file_akta', 'file_kk', 'file_kk', 'file_ktp', 'file_lembar_bimbingan', 'file_pembayaran_semester', 'file_pembayaran_skripsi',
         'file_sertifikat',
     ];
+
+    public function tahunAjaran() {
+        return $this->belongsTo(TahunAjaran::class);
+    }
 }
