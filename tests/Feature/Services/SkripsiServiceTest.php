@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Services;
 
+use App\Exceptions\InvariantException;
 use App\Http\Requests\SkripsiAddRequest;
 use App\Models\TahunAjaran;
 use App\Services\SkripsiService;
@@ -30,7 +31,7 @@ class SkripsiServiceTest extends TestCase
     public function test_add_skripsi()
     {
         $request = new SkripsiAddRequest([
-            'nim' => '2019150080',
+            'nim' => '78f5d0b3-4a95-3459-afed-987b8e5a4fbc',
             'judul' => 'test',
             'pembimbing1' => 'test',
             'pembimbing2' => 'test',
@@ -44,5 +45,20 @@ class SkripsiServiceTest extends TestCase
         ]);
         $this->assertDatabaseCount('tahun_ajaran', 1);
     }
+
+    /** @test */
+    public function test_add_mahasiswa_nim_not_found()
+    {
+        $this->expectException(InvariantException::class);;
+        $request = new SkripsiAddRequest([
+            'nim' => 'salah',
+            'judul' => 'test',
+            'pembimbing1' => 'test',
+            'pembimbing2' => 'test',
+        ]);
+        $tahunAjaran = TahunAjaran::factory()->create();
+        $this->skripsiService->add($request, $tahunAjaran->id);
+    }
+    
     
 }

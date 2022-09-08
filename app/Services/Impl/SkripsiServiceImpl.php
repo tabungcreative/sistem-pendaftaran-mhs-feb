@@ -20,14 +20,14 @@ class SkripsiServiceImpl implements SkripsiService
         $pembimbing1 = $request->input('pembimbing1');
         $pembimbing2 = $request->input('pembimbing2');
 
-        $url = 'http://localhost:3000';
+        $url = 'https://feb-unsiq.ac.id/api';
         
-        $response = Http::get($url .'/mahasiswa');
+        $response = Http::get($url .'/mahasiswa/' . $nim);
 
         try {
             $mahasiswa = json_decode($response->body(), $depth=512, JSON_THROW_ON_ERROR)['data'];
-         
-            if (isset($mahasiswa)) {
+
+            if ($response->status() == 200) {
                 $skripsi = new Skripsi();
                 $skripsi->nim = $mahasiswa['nim'];
                 $skripsi->judul = $judul;
@@ -43,4 +43,4 @@ class SkripsiServiceImpl implements SkripsiService
 
         return $skripsi;
     }
-}
+}   
