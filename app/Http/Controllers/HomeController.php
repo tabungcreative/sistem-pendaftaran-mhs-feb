@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\InvariantException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -12,8 +14,8 @@ class HomeController extends Controller
         return view('home.index');
     }
 
-    public function listDaftar($nim)
+    public function daftar($nim)
     {
-        
+        return view('home.daftar', compact('nim'));
     }
 }

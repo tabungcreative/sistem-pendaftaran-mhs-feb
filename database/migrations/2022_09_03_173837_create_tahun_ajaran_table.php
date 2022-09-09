@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('tahun');
             $table->integer('semester');
+            $table->boolean('is_active')->default(0);
             $table->timestamps();
         });
     }

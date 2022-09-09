@@ -3,8 +3,12 @@
 @section('content')
 <div class="row d-flex justify-content-center pt-5">
     <div class="col-md-6">
-        <div class="card shadow">
+        <div class="card shadow border-0">
             <div class="card-body">
+                <div class="text-center">
+                    <img src="{{ asset('img/logo-feb.png') }}" alt="" srcset="" class="img-fluid" width="200px">
+                    <p>Masukan Nomer Induk Mahasiswa untuk melanjutkan pelayanan pedaftaran mahasiswa</p>
+                </div>
                 <form id="form-nim">
                     <div class="mb-3">
                         <label class="form-label">Masukan Nomer Induk Mahasiswa</label>
@@ -42,14 +46,16 @@
 </div>
 @endsection
 
-
-@section('script')
+@section('style')
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+@endsection
+@section('script')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const formNim = document.getElementById('form-nim');
         formNim.addEventListener('submit', function(event) {
-            // event.preventDefault();
+            event.preventDefault();
             tampilMahasiswa();
         });
     });
@@ -59,14 +65,13 @@
 
         const nim = document.getElementById('nim').value;
 
+        if (nim === "") {
+            return swal("Gagal", `Mahasiswa tidak ditemukan`, "warning");
+        }
+
         fetch(url + nim)
             .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    return swal("Gagal", `Mahasiswa dengan nim ${nim} tidak ditemukan`, "warning");
-                    // alert(`Mahasiswa dengan nim ${nim} tidak ditemukan, silahkan masukan kembali nim dengan benar`);
-                }
+                return response.json();
             }).then((data) => {
                 const mahasiswa = data.data;
 
@@ -80,7 +85,7 @@
                         <tr>
                             <th scope="col">Nomer Induk Mahasiswa</th>
                             <th scope="col">:</th>
-                            <td scope="col">${mahasiswa.nim}</td>
+                            <td scope="col">${mahasiswa.nim ?? 'tidak diketahu'}</td>
                         </tr>
                         <tr>
                             <th scope="col">Nama</th>
@@ -93,7 +98,8 @@
                             <td scope="col">${mahasiswa.prodi}</td>
                         </tr>
                     </table>
-                    <a href="#" class="btn btn-primary">Lanjut Pilih Pendaftaran</a>
+
+                    <a href="daftar/${mahasiswa.nim}" class="btn btn-primary">Lanjut Pilih Pendaftaran</a>
                 </div>
                 `;
 
@@ -102,10 +108,11 @@
                 detailMahasiswa.innerHTML = '';
 
                 detailMahasiswa.append(card);
-                return swal("Success", `Mahasiswa dengan nim terdaftar`, "Success");
+                return swal("Success", `Mahasiswa dengan nim terdaftar`, "success");
+
 
             }).catch(function(err) {
-                // console.log(err);
+                return swal("Gagal", `Mahasiswa tidak ditemukan`, "warning");
             })
     }
 </script>

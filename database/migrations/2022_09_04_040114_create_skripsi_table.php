@@ -22,16 +22,8 @@ return new class extends Migration
             $table->string('judul');
             $table->string('pembimbing1');
             $table->string('pembimbing2');
-            $table->string('file_berkas')->nullable();
-            $table->string('file_ijazah')->nullable();
-            $table->string('file_transkrip')->nullable();
-            $table->string('file_akta')->nullable();
-            $table->string('file_kk')->nullable();
-            $table->string('file_ktp')->nullable();
-            $table->string('file_lembar_bimbingan')->nullable();
-            $table->string('file_pembayaran_semester')->nullable();
-            $table->string('file_pembayaran_skripsi')->nullable();
-            $table->string('file_sertifikat')->nullable();
+            $table->string('no_pembayaran')->nullable();
+            $table->string('file_skripsi')->nullable();
             $table->timestamps();
         });
     }

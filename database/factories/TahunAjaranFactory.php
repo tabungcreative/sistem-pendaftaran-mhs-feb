@@ -20,7 +20,8 @@ class TahunAjaranFactory extends Factory
         $tahun = fake()->year();
         return [
             'tahun' => $tahun . "/" . ((int)$tahun + 1),
-            'semester' => Arr::random([1,2])
+            'semester' => Arr::random([1,2]),
+            'is_active' => 0,
         ];
     }
 }
