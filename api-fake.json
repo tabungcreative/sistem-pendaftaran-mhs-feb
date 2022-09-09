@@ -1,0 +1,17 @@
+{
+    "mahasiswa": {
+        "status": "success",
+        "data": {
+            "nim": "2019150080",
+            "nama": "roy",
+            "prodi": "india"
+        }
+    },
+    "pembayaran-2019150080": {
+        "status": "success",
+        "data": {
+            "nomer_pembayaran": "SK-001",
+            "nim": "2019150080"
+        }
+    }
+}

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SkripsiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/daftar/{nim}', [HomeController::class, 'daftar']);
+Route::get('/daftar/{nim}/skripsi', [HomeController::class, 'daftarSkripsi'])->name('daftar-skripsi');
+
+
+Route::controller(SkripsiController::class)->name('skripsi.')->prefix('skripsi')->group(function() {
+    Route::get('/{nim}/create', 'create')->name('create');
+    Route::post('/', 'store')->name('store');
 });
